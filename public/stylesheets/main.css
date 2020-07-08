@@ -23,6 +23,12 @@ textarea{
 }
 
 
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+}
+
 /* NEW CONFIRMED */
 #alert {
 	margin-top: 4%;

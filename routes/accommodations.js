@@ -3,6 +3,16 @@ var router = express.Router();
 var Accommodation = require("../models/accommodation");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
+var NodeGeocoder = require('node-geocoder');
+ 
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+var geocoder = NodeGeocoder(options);
 
 //INDEX - show all accommodations
 router.get("/", function(req, res){
@@ -27,7 +37,15 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 		id: req.user._id,
 		username: req.user.username
 	};
-    var newAccommodation = {name: name, image: image, description: desc, price: price, author: author}
+	geocoder.geocode(req.body.location, function (err, data) {
+    if (err || !data.length) {
+      req.flash("error", "Invalid address.");
+      return res.redirect("back");
+    };
+    var lat = data[0].latitude;
+    var lng = data[0].longitude;
+    var location = data[0].formattedAddress;
+    var newAccommodation = {name: name, image: image, description: desc, location: location, lat: lat, lng: lng, price: price, author: author};
     // Create a new accommodation and save to DB
     Accommodation.create(newAccommodation, function(err, newlyCreated){
         if(err){
@@ -38,6 +56,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             res.redirect("/accommodations");
         }
     });
+});
 });
 
 // NEW route
@@ -74,14 +93,26 @@ router.get("/:id/edit", middleware.isAccommodationOwnership, (req, res) => {
 });
 
 // UPDATE
-router.put("/:id", (req,res) => {
-	Accommodation.findByIdAndUpdate(req.params.id, req.body.accommodation, (err, updatedAccommodation) => {
-		if (err) {
-			res.redirect("/accommodations");
-		} else {
-			res.redirect("/accommodations/" + req.params.id);
-		}
-	});
+router.put("/:id", middleware.isAccommodationOwnership, function(req, res){
+  geocoder.geocode(req.body.location, function (err, data) {
+    if (err || !data.length) {
+      req.flash("error", "Invalid address.");
+      return res.redirect("back");
+    }
+    req.body.accommodation.lat = data[0].latitude;
+    req.body.accommodation.lng = data[0].longitude;
+    req.body.accommodation.location = data[0].formattedAddress;
+
+    Accommodation.findByIdAndUpdate(req.params.id, req.body.accommodation, function(err, accommodation){
+        if(err){
+            req.flash("error", err.message);
+            res.redirect("back");
+        } else {
+            req.flash("success","Successfully Updated!");
+            res.redirect("/accommodations/" + accommodation._id);
+        }
+    });
+  });
 });
 
 // DESTROY
@@ -95,7 +126,6 @@ router.delete("/:id", middleware.isAccommodationOwnership, (req, res) => {
 		}
 	});
 });
-
 
 
 module.exports = router;
