@@ -1,0 +1,73 @@
+body {
+	font-family: 'Quicksand', sans-serif;
+}
+
+img {
+	width: 100%;
+}
+
+textarea{ 
+	resize:none;
+}
+
+.delete-form {
+	display: inline;
+}
+
+.thumbnail {
+	padding: 0;
+}
+
+.thumbnail .caption-full {
+	padding: 2%;
+}
+
+
+/* NEW CONFIRMED */
+#alert {
+	margin-top: 4%;
+}
+
+/* 	test */
+
+
+/* .jumbotron {
+	margin-top: 9%;
+} */
+
+.btn-light:hover {
+    background-color: orange;
+    color: whitesmoke;
+}
+
+.btn-outline-light:hover {
+    background-color: orange;
+    color: whitesmoke;
+}
+
+#mainNavbar {
+    font-size: 1.2rem;
+    font-weight: 100;
+    background: black; 
+}
+
+#mainNavbar .nav-link {
+    color: white;
+}
+
+#mainNavbar .nav-link:hover {
+    /* color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(222, 222, 222, 0.5); */
+    color: orange;
+    background-color: transparent;
+    border-radius: 0.35rem;
+}
+
+#mainNavbar .navbar-brand {
+    color: white;
+    font-size: 2.3rem;
+}
+
+#mainNavbar .navbar-brand:hover {
+    color: orange;
+}
