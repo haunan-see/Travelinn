@@ -23,13 +23,16 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
+
+const db_url = process.env.DB_URL;
 mongoose.connect("mongodb://localhost:27017/travelinn", {
+// mongoose.connect(db_url, {
         // useCreateIndex:true,
 		useFindAndModify: false,
         useUnifiedTopology:true,
         useNewUrlParser:true
     }).then( () => {
-          console.log("Connected To Travelinn DataBase");
+          console.log("Travelinn DataBase connected successfully...");
       }).catch((err) => {
         console.log("DataBase Connection Error " + err);
 });
