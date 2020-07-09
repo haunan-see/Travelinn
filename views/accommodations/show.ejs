@@ -9,9 +9,9 @@
 				Travelinn
 			</p>
 			<div class="list-group">
-				<li class="list-group-item active">Info 1</li>
-				<li class="list-group-item">Info 2</li>
-				<li class="list-group-item">Info 3</li>
+				<li class="list-group-item">Detail</li>
+				<li class="list-group-item">Contact</li>
+				<li class="list-group-item">Location</li>
 			</div>
 			<div id="map"></div>
 		</div>
@@ -38,6 +38,62 @@
 					<% } %>
 				</div>
 			</div>
+			
+			<!-- REVIEW SECTION -->
+            <div class="thumbnail">
+                <div class="caption-full">
+                    <% if (accommodation.rating === 0) { %>
+                    <h5>
+                        <em>No reviews yet.</em>
+                    </h5>
+                    <% } else { %>
+                    <p>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star <% if (accommodation.rating > 1.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (accommodation.rating > 2.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (accommodation.rating > 3.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (accommodation.rating > 4.5) { %> checked <% } %>"></span>
+                        <em>(total reviews: <%= accommodation.reviews.length %>)</em>
+                    </p>
+                    <p>
+                        Current accommodation rating: <strong><%= accommodation.rating.toFixed(2) %></strong>
+                    </p>
+                    <!-- <p><h4>Latest reviews for this accommodation:</h4></p> -->
+                    <hr style="margin-top: 0;">
+                    <% accommodation.reviews.slice(0, 5).forEach(function(review){ %>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="fa fa-star"></span>'.repeat(5 - review.rating) %>
+                            <div>Review by: <strong><%= review.author.username %></strong></div>
+                            <span><em><%= review.updatedAt.toDateString() %></em></span>
+                        </div>
+                        <div class="col-md-9">
+                            <p style="text-align: justify; word-wrap: break-word;">
+                                <%= review.text %>
+                            </p>
+                            <% if(currentUser && review.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning"
+                               href="/accommodations/<%=accommodation._id %>/reviews/<%=review._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/accommodations/<%=accommodation._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                            <% } %>
+                        </div>
+                    </div>
+                    <hr>
+                    <% }); %>
+                    <div style="margin-bottom: 10px;">
+                        <h4><a href="/accommodations/<%= accommodation._id %>/reviews"><i class="fa fa-search" aria-hidden="true"></i> See all reviews</a></h4>
+                    </div>
+                    <% } %>
+                    <div>
+                        <a class="btn btn-primary btn-lg <% if (currentUser && accommodation.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/accommodations/<%= accommodation._id %>/reviews/new">
+                            Write a New Review</a>
+                    </div>
+                </div>
+            </div>
+			
+			<!-- COMMENT SECTION -->
 			<div class="well">
 				<div class="text-right">
 					<a class="btn btn-info" href="/accommodations/<%= accommodation._id %>/comments/new">New Comment</a>
@@ -51,7 +107,7 @@
 						<p>
 							<%= comment.text %>
 						</p>
-						<% if(currentUser && accommodation.author.id.equals(currentUser._id)){ %>
+						<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
 							<a class="btn btn-xs btn-info" href="/accommodations/<%= accommodation._id %>/comments/<%= comment._id %>/edit">edit</a>
 							<form class="delete-form" action="/accommodations/<%= accommodation._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
 								<button class="btn btn-xs btn-danger">delete</button>

@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Accommodation = require("../models/accommodation");
 var Comment = require("../models/comment");
+var Review = require("../models/review");
 var middleware = require("../middleware");
 var NodeGeocoder = require('node-geocoder');
  
@@ -68,7 +69,10 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 // SHOW - shows more info about one accommodation
 router.get("/:id", function(req, res){
     //find the accommodation with provided ID
-    Accommodation.findById(req.params.id).populate("comments").exec(function(err, foundAccommodation){
+    Accommodation.findById(req.params.id).populate("comments").populate({
+		path: "reviews",
+		options: {sort: {createdAt: -1}}
+	}).exec(function(err, foundAccommodation){
         if(err){
             console.log(err);
         } else {
@@ -117,16 +121,43 @@ router.put("/:id", middleware.isAccommodationOwnership, function(req, res){
 });
 
 // DESTROY
-router.delete("/:id", middleware.isAccommodationOwnership, (req, res) => {
-	Accommodation.findByIdAndRemove(req.params.id, (err) => {
-		if (err) {
-			res.redirect("/accommodations");
-		} else {
-			req.flash("error", "Accommodation Deleted.")
-			res.redirect("/accommodations");
-		}
-	});
-});
+// router.delete("/:id", middleware.isAccommodationOwnership, (req, res) => {
+// 	Accommodation.findByIdAndRemove(req.params.id, (err) => {
+// 		if (err) {
+// 			res.redirect("/accommodations");
+// 		} else {
+// 			req.flash("error", "Accommodation Deleted.")
+// 			res.redirect("/accommodations");
+// 		}
+// 	});
+// });
 
+// DESTROY ACCOMMODATION ROUTE
+router.delete("/:id", middleware.isAccommodationOwnership, function (req, res) {
+    Accommodation.findById(req.params.id, function (err, accommodation) {
+        if (err) {
+            res.redirect("/accommodations");
+        } else {
+            // deletes all comments associated with the accommodation
+            Comment.remove({"_id": {$in: accommodation.comments}}, function (err) {
+                if (err) {
+                    console.log(err);
+                    return res.redirect("/accommodations");
+                }
+                // deletes all reviews associated with the accommodation
+                Review.remove({"_id": {$in: accommodation.reviews}}, function (err) {
+                    if (err) {
+                        console.log(err);
+                        return res.redirect("/accommodations");
+                    }
+                    //  delete the accommodation
+                    accommodation.remove();
+                    req.flash("success", "Accommodation Deleted.");
+                    res.redirect("/accommodations");
+                });
+            });
+        }
+    });
+});
 
 module.exports = router;

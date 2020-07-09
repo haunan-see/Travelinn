@@ -1,4 +1,4 @@
-<%- include('../partials/header'); -%>
+<%- include("../partials/header"); -%>
 
 
 	<div id="main_content" class="container">
@@ -19,6 +19,15 @@
                    <img src="<%= accommodation.image %>">
                    <div class="caption">
                        <h4><%= accommodation.name %></h4>
+					   <% if (accommodation.rating === 0) { %>
+						<em>No reviews yet.</em>
+						<% } else { %>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star <% if (accommodation.rating > 1.5) { %> checked <% } %>"></span>
+							<span class="fa fa-star <% if (accommodation.rating > 2.5) { %> checked <% } %>"></span>
+							<span class="fa fa-star <% if (accommodation.rating > 3.5) { %> checked <% } %>"></span>
+							<span class="fa fa-star <% if (accommodation.rating > 4.5) { %> checked <% } %>"></span>
+						<% } %>
                    </div>
 					<p>
                        <a href="/accommodations/<%= accommodation._id %>" class="btn btn-primary">More Info</a>
@@ -29,4 +38,4 @@
     </div>
 </div>
 
-<%- include('../partials/footer'); -%>
+<%- include("../partials/footer"); -%>

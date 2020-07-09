@@ -15,7 +15,8 @@ const express 		   = require("express"),
 
 const commentRoutes    = require("./routes/comments"),
 	  accommodationRoutes = require("./routes/accommodations"),
-      indexRoutes      = require("./routes/index");
+      indexRoutes      = require("./routes/index"),
+	  reviewRoutes     = require("./routes/reviews");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -70,6 +71,7 @@ app.use(function(req, res, next){
 app.use("/accommodations", accommodationRoutes);
 app.use("/accommodations/:id/comments", commentRoutes);
 app.use(indexRoutes);
+app.use("/accommodations/:id/reviews", reviewRoutes);
 
 app.listen(3000, () => {
 	console.log("Travelinn server started...");

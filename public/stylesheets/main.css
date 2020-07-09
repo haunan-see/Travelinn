@@ -18,10 +18,17 @@ textarea{
 	padding: 0;
 }
 
+.thumbnail img {
+    width: 100%;
+}
+
 .thumbnail .caption-full {
 	padding: 2%;
 }
 
+.checked {
+    color: orange;
+}
 
 /* Google Maps */
 #map {

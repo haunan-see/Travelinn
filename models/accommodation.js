@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var Review = require("./review");
 
 // SCHEMA SETUP
 var accommodationSchema = new mongoose.Schema({
@@ -22,7 +23,17 @@ var accommodationSchema = new mongoose.Schema({
 		   type: mongoose.Schema.Types.ObjectId,
 		   ref: "Comment"
 	   }
-   ]
+   ],
+	reviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ],
+    rating: {
+        type: Number,
+        default: 0
+    }
 });
 
 module.exports = mongoose.model("Accommodation", accommodationSchema);
