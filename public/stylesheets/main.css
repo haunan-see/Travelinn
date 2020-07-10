@@ -1,5 +1,8 @@
 body {
-	font-family: 'Quicksand', sans-serif;
+	font-family: 'Raleway', sans-serif;
+	background-color: #EDEFF8;
+	/* background-repeat: no-repeat;
+	background-size: cover; */
 }
 
 img {
@@ -14,15 +17,15 @@ textarea{
 	display: inline;
 }
 
-.thumbnail {
+.card {
 	padding: 0;
 }
 
-.thumbnail img {
+.card img {
     width: 100%;
 }
 
-.thumbnail .caption-full {
+.card .caption-full {
 	padding: 2%;
 }
 
@@ -38,15 +41,34 @@ textarea{
 
 /* NEW CONFIRMED */
 #alert {
-	margin-top: 4%;
+	margin-top: 1%;
 }
 
 /* 	test */
 
+.btn-sm {
+	display: inline-block;
+}
 
-/* .jumbotron {
-	margin-top: 9%;
-} */
+h4 {
+	font-size: 1.2rem;
+	padding-top: 4%;
+}
+
+.nav-info {
+	color: white;
+	padding: 10px
+}
+
+.jumbotron {
+	/* background-color: #d7d7d7; */
+   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.unsplash.com/photo-1521747116042-5a810fda9664?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80');
+  -webkit-background-size: cover;
+  -moz-background-size:  cover;
+  -o-background-size: cover;
+  background-size: fill;
+
+}
 
 .btn-light:hover {
     background-color: orange;
@@ -61,7 +83,7 @@ textarea{
 #mainNavbar {
     font-size: 1.2rem;
     font-weight: 100;
-    background: black; 
+    background: #838399; 
 }
 
 #mainNavbar .nav-link {
@@ -79,8 +101,11 @@ textarea{
 #mainNavbar .navbar-brand {
     color: white;
     font-size: 2.3rem;
+	font-family: 'Montserrat Subrayada', sans-serif;
 }
 
 #mainNavbar .navbar-brand:hover {
     color: orange;
+	font-family: 'Montserrat Subrayada', sans-serif;
+
 }

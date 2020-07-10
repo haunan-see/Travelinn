@@ -1,13 +1,10 @@
 <%- include("../partials/header"); -%>
 
-<h1><%= accommodation.name %></h1>
 
 <div class="container">
+	<h1><%= accommodation.name %></h1>
 	<div class="row">
 		<div class="col-md-3">
-			<p class="lead">
-				Travelinn
-			</p>
 			<div class="list-group">
 				<li class="list-group-item">Detail</li>
 				<li class="list-group-item">Contact</li>
@@ -16,7 +13,7 @@
 			<div id="map"></div>
 		</div>
 		<div class="col-md-9">
-			<div class="thumbnail">
+			<div class="card">
 				<img class="img-responsive" src="<%= accommodation.image %>">
 				<div class="caption-full">
 					<h4 class="float-right">
@@ -31,34 +28,38 @@
 						<span class="float-right"><%= moment(accommodation.createdAt).fromNow() %></span>
 					</p>
 					<% if(currentUser && accommodation.author.id.equals(currentUser._id)){ %>
-						<a class="btn btn-xs btn-warning" href="/accommodations/<%= accommodation._id %>/edit">Edit</a>
+						<a class="btn btn-sm btn-warning" href="/accommodations/<%= accommodation._id %>/edit">Edit</a>
 					<form class="delete-form" action="/accommodations/<%= accommodation._id %>?_method=DELETE" method="POST">
-						<button class="btn btn-xs btn-danger">Delete</button>
+						<button class="btn btn-sm btn-danger">Delete</button>
 					</form>
 					<% } %>
 				</div>
-			</div>
-			
-			<!-- REVIEW SECTION -->
-            <div class="thumbnail">
-                <div class="caption-full">
-                    <% if (accommodation.rating === 0) { %>
+				<% if (accommodation.rating === 0) { %>
                     <h5>
                         <em>No reviews yet.</em>
                     </h5>
                     <% } else { %>
+					<div class="card-footer">
                     <p>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star <% if (accommodation.rating > 1.5) { %> checked <% } %>"></span>
                         <span class="fa fa-star <% if (accommodation.rating > 2.5) { %> checked <% } %>"></span>
                         <span class="fa fa-star <% if (accommodation.rating > 3.5) { %> checked <% } %>"></span>
                         <span class="fa fa-star <% if (accommodation.rating > 4.5) { %> checked <% } %>"></span>
-                        <em>(total reviews: <%= accommodation.reviews.length %>)</em>
+                        <small class="text-muted"><em>(total reviews: <%= accommodation.reviews.length %>)</em></small>
                     </p>
                     <p>
-                        Current accommodation rating: <strong><%= accommodation.rating.toFixed(2) %></strong>
+                        <small class="text-muted">Current accommodation rating: <strong><%= accommodation.rating.toFixed(2) %></strong></small>
                     </p>
-                    <!-- <p><h4>Latest reviews for this accommodation:</h4></p> -->
+					</div>
+			</div>
+    
+			
+			<!-- REVIEW SECTION -->
+            <div class="thumbnail">
+                <div class="caption-full">
+                    
+                    <p><h4>Latest reviews for this accommodation:</h4></p>
                     <hr style="margin-top: 0;">
                     <% accommodation.reviews.slice(0, 5).forEach(function(review){ %>
                     <div class="row">
@@ -72,10 +73,10 @@
                                 <%= review.text %>
                             </p>
                             <% if(currentUser && review.author.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-xs btn-warning"
+                            <a class="btn btn-sm btn-warning"
                                href="/accommodations/<%=accommodation._id %>/reviews/<%=review._id %>/edit">Edit</a>
                             <form id="delete-form" action="/accommodations/<%=accommodation._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
-                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
                             </form>
                             <% } %>
                         </div>
@@ -88,37 +89,106 @@
                     <% } %>
                     <div>
                         <a class="btn btn-primary btn-lg <% if (currentUser && accommodation.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/accommodations/<%= accommodation._id %>/reviews/new">
-                            Write a New Review</a>
+                            Write a Review</a>
                     </div>
                 </div>
             </div>
 			
-			<!-- COMMENT SECTION -->
-			<div class="well">
-				<div class="text-right">
-					<a class="btn btn-info" href="/accommodations/<%= accommodation._id %>/comments/new">New Comment</a>
-				</div>
-				<hr>
-				<% accommodation.comments.forEach(function(comment){ %>
-				<div class="row">
-					<div class="col-md-12">
-						<strong><%= comment.author.username %></strong>
-						<span class="float-right"><%= moment(accommodation.createdAt).fromNow() %></span>
-						<p>
-							<%= comment.text %>
-						</p>
-						<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-							<a class="btn btn-xs btn-info" href="/accommodations/<%= accommodation._id %>/comments/<%= comment._id %>/edit">edit</a>
-							<form class="delete-form" action="/accommodations/<%= accommodation._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-								<button class="btn btn-xs btn-danger">delete</button>
-							</form>
-						<% } %>
-					</div>
-				</div>
-				<% }) %>
-				<a href="/accommodations">Go Back</a>
-			</div>
-		</div>
+			
+	<!--COMMENT SECTION START-->
+    <div class="well">
+      <!--Setting up the add new comment button that is used for collapsing-->
+      <div class="text-right">
+        <a class="btn btn-success float-right" role="button" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Add Comment</a>
+      </div>
+
+      <!--Comment section title-->
+      <h4><strong>Comments <span class="glyphicon glyphicon glyphicon-comment" aria-hidden="true"></span></strong></h4>
+
+      <!--Collapse Add a comment form START-->
+      <div class="collapse" id="collapseComment">
+        <div class="well">
+            <% if(!currentUser) { %>
+          <!--If the user is not logged in, direct him to the login page-->
+          <h5>Log in required. <a href="/login">Click here</a> direct to the login page.</h5>
+            <% } %>
+            <% if(currentUser) { %>
+          <!--If the user is logged in, show the new comment form-->
+          <h4>Write your comment <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span></h4>
+          <form id="add-comment-form" action="/accommodations/<%= accommodation._id %>/comments" method="POST">
+            <div class="form-group">
+              <input class="form-control" type="text" disabled value="<%= currentUser.username %>">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="comment[text]" placeholder="Write your comment..." form="add-comment-form" rows="5" cols="70"></textarea>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-success btn-sm">Comment <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+            </div>
+          </form>
+            <% } %>
+        </div>
+      </div>
+		
+	<hr>	
+		<!-- IF NO COMMENT -->
+		<% if (accommodation.comments.length === 0) { %>
+			  <em style="color: grey;">No comments yet.</em>
+		<% } %>	
+
+		<!--Display comments by looping through them-->
+        <% accommodation.comments.forEach(function(comment) { %>
+      <div class="row">
+        <div class="col-md-12">
+          <strong>
+              <% if (currentUser && currentUser._id.equals(comment.author.id)) { %>
+            <!--If the current user owns the comment, change the color of the user icon-->
+            <span style="color: orange;" class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <% } else { %>
+            <!--Else just display it black-->
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <% } %>
+            <!--Print out the author username-->
+              <%= comment.author.username %>
+          </strong>
+          <!--Show when the comment was made-->
+          <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+          <!--Printing the comment-->
+          <p><%= comment.text %></p>
+          <!--If the visitor is logged in and the owner of the comment, show the edit and delete buttons-->
+            <% if (currentUser && currentUser._id.equals(comment.author.id)) { %>
+          <!--Edit button used for collapsing the edit comment form-->
+          <a class="btn btn-sm btn-warning" role="button" data-toggle="collapse" href="#collapseEdit<%= comment._id %>" aria-expanded="false" aria-controls="collapse<%= comment._id %>">
+            Edit</a>
+          <!--Delete comment button-->
+          <form id="delete-form" action="/accommodations/<%= accommodation._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </form>
+          <!--Edit comment form-->
+          <div class="collapse" id="collapseEdit<%= comment._id %>">
+            <div class="well">
+              <h4>Edit your comment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h4>
+              <form id="edit-comment-form<%= comment._id %>" action="/accommodations/<%= accommodation._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+                <div class="form-group">
+                  <input class="form-control" type="text" disabled value="<%= currentUser.username %>">
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="comment[text]" placeholder="Your comment text..." form="edit-comment-form<%= comment._id %>" rows="5" cols="70"><%= comment.text %></textarea>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-warning btn-sm">Edit comment <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+                </div>
+              </form>
+            </div>
+          </div>
+            <% } %>
+          <hr>
+        </div>
+      </div>
+        <% }) %>
+    </div>
+		
 	</div>
 </div>
 
@@ -149,6 +219,6 @@
     });
   }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlruGDXINk2aodw36mYDk2IOaYrhCUmZU&callback=initMap"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlruGDXINk2aodw36mYDk2IOaYrhCUmZU&callback=initMap"></script> -->
 
 <%- include("../partials/footer"); -%>
