@@ -23,7 +23,7 @@
                     <p>
                         Current accommodation rating: <strong><%= accommodation.rating.toFixed(2) %></strong>
                     </p>
-					<!-- <p><h4>All reviews for this accommodation:</h4></p> -->
+					<p><h4>All reviews for this accommodation:</h4></p>
                     <hr style="margin-top: 0;">
                     <% accommodation.reviews.forEach(function(review){ %>
                     <div class="row">
@@ -37,10 +37,10 @@
                                 <%= review.text %>
                             </p>
                             <% if(currentUser && review.author.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-xs btn-warning"
+                            <a class="btn btn-sm btn-warning"
                                href="/accommodations/<%=accommodation._id %>/reviews/<%=review._id %>/edit">Edit</a>
                             <form id="delete-form" action="/accommodations/<%=accommodation._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
-                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
                             </form>
                             <% } %>
                         </div>
@@ -59,7 +59,5 @@
             </div>
         </div>
     </div>
-    <!--Review section-->
-</div>
 
 <%- include("../partials/footer"); -%>

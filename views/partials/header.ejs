@@ -25,106 +25,49 @@
 		
 		<!-- MDN NAVBAR START -->
 		<!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav id="mainNavbar" class="mb-1 navbar navbar-expand-lg navbar-dark indigo">
+  <a class="navbar-brand" href="/">Travelinn</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
+      <li class="nav-item">
+        <a class="nav-link" href="/accommodations">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Dropdown
-        </a>
-        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+        <a class="nav-link" href="#">About</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-          <i class="fab fa-twitter"></i>
-        </a>
+		<li class="nav-item">
+        <form class="form-inline my-2 my-lg-0 ml-auto">
+			<input class="form-control" type="search" placeholder="Location / Accommodation Name" aria-label="Search">
+			<button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+  		</form>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-          <i class="fab fa-google-plus-g"></i>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-default"
-          aria-labelledby="navbarDropdownMenuLink-333">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+		
+      	<% if(!currentUser){ %>
+			<li><a class="btn btn-info btn-rounded btn-sm" href="/login">Login</a></li>
+			<li><a class="btn btn-info btn-rounded btn-sm" href="/register">Sign-Up</a></li>
+		<% } else { %>
+			<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+			  aria-haspopup="true" aria-expanded="false">
+			  <i class="fas fa-user"></i> <%= currentUser.username %> </a>
+			<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+			  <a class="dropdown-item" href="#">My account</a>
+			  <a class="dropdown-item" href="/logout">Log out</a>
+			</div>
+		  </li>
+		<% } %>
     </ul>
   </div>
 </nav>
 <!--/.Navbar -->
 		<!-- MDN NAVBAR END-->
-		
-		<nav id="mainNavbar" class="navbar navbar-light navbar-expand-lg py-0 fixed-top">
-        	<a href="/" class="navbar-brand">Travelinn</a>
-        	<button class="navbar-toggler navbar-light bg-light" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
-            	<span class="navbar-toggler-icon"></span>
-        	</button>
-			
-        <div class="collapse navbar-collapse" id="navLinks">
-            <ul class="navbar-nav list-unstyled">
-                <li class="nav-item">
-                    <a href="/accommodations" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">About</a>
-                </li>
-				
-				<div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-				  <a class="dropdown-item" href="#">Action</a>
-				  <a class="dropdown-item" href="#">Another action</a>
-				  <a class="dropdown-item" href="#">Something else here</a>
-				</div>
-            </ul>
-          
 
-			<ul class="nav navbar-nav navbar-right ml-auto">
-				<li>
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2 input-lg" type="search" placeholder="Location" aria-label="Search">
-						<button class="btn btn-outline-light btn-sm my-2 my-sm-0" type="submit">SEARCH</button>
-					</form>
-				</li>
-				<% if(!currentUser){ %>
-					<li><a class="btn btn-outline-info" href="/login">Login</a></li>
-					<li><a class="btn btn-outline-info" href="/register">Sign-Up</a></li>
-				<% } else { %>
-					<li><a href="#" class=nav-info>Signed In as: <%= currentUser.username %></a></li>
-					<li><a href="/logout" class="nav-info">Logout</a></li>
-				<% } %>
-			</ul>
-			
-        </div>
-    </nav>
 		
 		<div id="alert" class="container">
 			<% if(error && error.length > 0){ %>

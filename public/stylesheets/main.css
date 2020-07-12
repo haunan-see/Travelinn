@@ -62,12 +62,15 @@ h4 {
 
 .jumbotron {
 	/* background-color: #d7d7d7; */
-   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.unsplash.com/photo-1521747116042-5a810fda9664?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80');
-  -webkit-background-size: cover;
-  -moz-background-size:  cover;
-  -o-background-size: cover;
-  background-size: fill;
+	background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1) ), url("https://images.unsplash.com/photo-1593198821458-31c3311fe9db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2251&q=80");
+	-webkit-background-size: cover;
+	-moz-background-size:  cover;
+	-o-background-size: cover;
+	background-size: fill;
+}
 
+.jombotronText {
+	color: whitesmoke
 }
 
 .btn-light:hover {
@@ -81,7 +84,7 @@ h4 {
 }
 
 #mainNavbar {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 100;
     background: #838399; 
 }
@@ -100,7 +103,7 @@ h4 {
 
 #mainNavbar .navbar-brand {
     color: white;
-    font-size: 2.3rem;
+    font-size: 2rem;
 	font-family: 'Montserrat Subrayada', sans-serif;
 }
 
@@ -108,4 +111,29 @@ h4 {
     color: orange;
 	font-family: 'Montserrat Subrayada', sans-serif;
 
+}
+
+#btnScrollTop {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	font-size: 3rem;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: red;
+	cursor: pointer;
+	padding: 0;
+	transition: 300ms;
+}
+
+#btnScrollTop:hover {
+	background-color: transparent;
+	color: darkred
+}
+
+html {
+  scroll-behavior: smooth;
 }
