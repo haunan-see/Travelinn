@@ -12,6 +12,14 @@
          </div>
      </header>
      
+		<% if (foundResult > 0) { %>
+		<div class="container">
+			<h5>
+				<strong><%= foundResult %></strong> result(s) matched search: "<em><%= searchKey %></em>"
+			</h5>
+		</div>
+		<% } %>
+		
      <div class="row text-center" style="display:flex; flex-wrap: wrap;">
         <% accommodations.forEach(function(accommodation){ %>
             <div class="col-md-3 col-sm-6">
@@ -38,6 +46,51 @@
     </div>
 </div>
 
+<% if (foundResult > 0) { %>
+		<div class="container">
+			<a href="accommodations" class="btn btn-blue">
+				Go Back
+			</a>
+		</div>
+		<% } %>
+
 <button onclick="topFunction()" id="btnScrollTop" title="scrollTop"><i class="fas fa-arrow-circle-up"></i></button>
+
+<footer class="page-footer font-small indigo pt-4">
+  <!-- Footer Elements -->
+	<div class="container">
+		<h5>ABOUT US</h5>
+		<p>
+			Travelinn was created by <strong><em>See Hau Nan</em></strong>.
+			<br>
+			Travelinn is a FREE online peer-to-peer marketplace for people who wants to rent their house or find a place to stay while traveilling.
+			<br>
+			Users can share their preferred accommodations with other users in the site after they registered an account.
+			<br>
+			All registered users can comment, review and rate the accommodations posted by other.
+		</p>
+	</div>
+	
+	 <hr class="clearfix w-90 d-md-none pb-3">
+	
+	  <div class="container">
+		<!-- Call to action -->
+		<ul class="list-unstyled list-inline text-center py-2">
+		  <li class="list-inline-item w-50">
+			<input type="email" class="form-control" placeholder="Your Email"
+			aria-label="Your Email" aria-describedby="basic-addon2">
+		  </li>
+		  <li class="list-inline-item">
+			<a href="#" class="btn btn-outline-white btn-sm">Subscribe to our Newsletter</a>
+		  </li>
+		</ul>
+		<!-- Call to action -->
+	  </div>
+	  <!-- Footer Elements -->
+	  <!-- Copyright -->
+	  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+		<a href="#"> Travelinn.com</a>
+	  </div>
+</footer>
 
 <%- include("../partials/footer"); -%>

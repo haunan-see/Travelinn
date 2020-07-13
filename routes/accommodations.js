@@ -16,15 +16,33 @@ var options = {
 var geocoder = NodeGeocoder(options);
 
 //INDEX - show all accommodations
-router.get("/", function(req, res){
-    // Get all accommodations from DB
-    Accommodation.find({}, function(err, allAccommodations){
-       if(err){
-           console.log(err);
-       } else {
-          res.render("accommodations/index",{accommodations: allAccommodations});
-       }
-    });
+router.get("/", (req, res) => {
+	if (req.query.search) {
+		var foundResult = 0;
+		const regexp = new RegExp(escapeRegex(req.query.search), "gi");
+		Accommodation.find({$or:[{name: regexp}, {location: regexp}]}, (err, allAccommodations) => {
+			if (err) {
+				console.log(err);
+			} else {
+				if (allAccommodations.length < 1){
+					req.flash("error", "Sorry, no result were found.");
+                	return res.redirect("back");
+				}
+			}
+			// return all found Accommodations
+			foundResult = allAccommodations.length;
+			res.render("accommodations/index", {accommodations: allAccommodations, foundResult: foundResult, searchKey: req.query.search});
+		});
+	} else {
+		// no search input
+		Accommodation.find({}, function(err, allAccommodations){
+		   if(err){
+			   console.log(err);
+		   } else {
+			  res.render("accommodations/index",{accommodations: allAccommodations, foundResult: foundResult, searchKey: req.query.search});
+		   }
+		});
+	}
 });
 
 //CREATE - add new accommodation to DB
@@ -159,5 +177,9 @@ router.delete("/:id", middleware.isAccommodationOwnership, function (req, res) {
         }
     });
 });
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;

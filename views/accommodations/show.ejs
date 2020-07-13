@@ -3,15 +3,81 @@
 
 <div class="container">
 	<h1><%= accommodation.name %></h1>
+	
 	<div class="row">
 		<div class="col-md-3">
-			<div class="list-group">
-				<li class="list-group-item">Detail</li>
-				<li class="list-group-item">Contact</li>
-				<li class="list-group-item">Location</li>
-			</div>
+			<!-- Card -->
+		  <div class="card map-card mb-4">
+			<!-- GOOGLE MAP -->
 			<div id="map"></div>
-		</div>
+			<!-- Card content -->
+			<div class="card-body closed px-0">
+			  <div class="white px-4 pb-4 pt-3-5 text-center">
+				<!-- Title -->
+				<h5 class="card-title h5 living-coral-text"><%= accommodation.location %></h5>
+				<div class="d-flex justify-content-center living-coral-text">
+				  <button class="btn peach-gradient">
+					  See Routes <i class="fas fa-map-marked-alt"></i>
+					</button>
+				</div>
+			  </div>
+
+			<!-- </div> -->
+
+		  </div>
+		  <!-- Card -->
+			
+			<!-- BOOKING FORM -->
+			<div class="card-body rounded-top pink darken-4">
+			  <h4 class="font-weight-bold text-center text-white mt-4">Reserve Now</h4>
+			  <!-- Form -->
+			  <form class="pb-3 px-2" action="#">
+				  <div class="md-form">
+					  <i class="far fa-user prefix text-white"></i>
+					  <input type="text" id="materialRegisterFormFirstName" class="form-control text-white">
+					  <label class="text-white" for="materialRegisterFormFirstName">Your name</label>
+				  </div>
+
+				  <div class="md-form mt-0">
+					  <i class="far fa-envelope prefix text-white"></i>
+					  <input type="email" id="materialRegisterFormEmail" class="form-control text-white">
+					  <label class="text-white" for="materialRegisterFormEmail">E-mail</label>
+				  </div>
+
+				  <label class="text-white">From</label>
+				  <div class="md-form mt-0">
+					  <i class="far fa-calendar-alt prefix text-white"></i>
+					  <input type="date" id="materialRegisterFormDate" class="form-control text-white" aria-describedby="materialRegisterFormDateHelpBlock">
+				  </div>
+				  
+				  <label class="text-white text-center">To</label>
+				  <div class="md-form mt-0">
+					  <i class="fas fa-calendar-alt prefix text-white"></i>
+					  <input type="date" id="materialRegisterFormPassword" class="form-control text-white" aria-describedby="materialRegisterFormPasswordHelpBlock">
+				  </div>
+				  
+				  <button class="btn peach-gradient btn-block my-4 waves-effect z-depth-0" type="submit">Confirm</button>
+			  </form>
+          <!-- BOOKING FORM END -->
+
+      	</div>
+			</div>
+			
+	<!-- CONTACT CARD -->
+	<!-- <div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Contact:</h4>	
+			<hr>
+			<p class="card-text"><i class="fas fa-mobile-alt"></i> 1300-88-2525</p>
+			<p class="card-text"><i class="fab fa-whatsapp"></i> 1300-88-2525</p>
+		 </div>
+	</div>	 -->
+			
+			
+		<!-- <div class="white px-4 pb-4 pt-3-5"> -->
+			</div>
+	
+
 		<div class="col-md-9">
 			<div class="card">
 				<img class="img-responsive" src="<%= accommodation.image %>">
@@ -53,7 +119,7 @@
                     </p>
 					</div>
 			</div>
-    
+ 
 			
 			<!-- REVIEW SECTION -->
             <div class="thumbnail">
@@ -99,7 +165,7 @@
     <div class="well">
       <!--Setting up the add new comment button that is used for collapsing-->
       <div class="text-right">
-        <a class="btn btn-success float-right" role="button" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
+        <a class="btn btn-success" role="button" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Add Comment</a>
       </div>
 
@@ -130,7 +196,6 @@
             <% } %>
         </div>
       </div>
-		
 	<hr>	
 		<!-- IF NO COMMENT -->
 		<% if (accommodation.comments.length === 0) { %>
