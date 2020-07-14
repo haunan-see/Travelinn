@@ -40,10 +40,41 @@ textarea{
     width: 100%;
 }
 
-/* NEW CONFIRMED */
+/* CONFIMED STYLE START */
+
+/* Back to top button */
+html {
+  scroll-behavior: smooth;
+}
+
+#btnScrollTop {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	font-size: 2.5rem;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	cursor: pointer;
+	transition: 300ms;
+	border-radius: 10%;
+}
+
+#btnScrollTop:hover {
+	background-color: transparent;
+	color: darkred
+}
+/* Back to top button */
+
+/* alert style */
 #alert {
 	margin-top: 1%;
 }
+/* alert style */
+
+/* CONFIMED STYLE END */
 
 /* 	test */
 
@@ -109,36 +140,11 @@ textarea{
 #mainNavbar .navbar-brand {
     color: white;
     font-size: 2rem;
-	font-family: 'Montserrat Subrayada', sans-serif;
+	font-family: 'Baloo Da 2', cursive;
 }
 
 #mainNavbar .navbar-brand:hover {
     color: orange;
-	font-family: 'Montserrat Subrayada', sans-serif;
-
 }
 
-#btnScrollTop {
-	display: none;
-	position: fixed;
-	bottom: 20px;
-	right: 30px;
-	z-index: 99;
-	font-size: 3rem;
-	border: none;
-	outline: none;
-	background-color: transparent;
-	color: red;
-	cursor: pointer;
-	padding: 0;
-	transition: 300ms;
-}
 
-#btnScrollTop:hover {
-	background-color: transparent;
-	color: darkred
-}
-
-html {
-  scroll-behavior: smooth;
-}

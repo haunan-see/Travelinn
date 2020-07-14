@@ -26,8 +26,8 @@ app.use(flash());
 
 
 const db_url = process.env.DB_URL;
-mongoose.connect("mongodb://localhost:27017/travelinn", {
-// mongoose.connect(db_url, {
+// mongoose.connect("mongodb://localhost:27017/travelinn", {
+mongoose.connect(db_url, {
         // useCreateIndex:true,
 		useFindAndModify: false,
         useUnifiedTopology:true,

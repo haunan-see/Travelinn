@@ -6,29 +6,8 @@
 	
 	<div class="row">
 		<div class="col-md-3">
-			<!-- Card -->
-		  <div class="card map-card mb-4">
-			<!-- GOOGLE MAP -->
-			<div id="map"></div>
-			<!-- Card content -->
-			<div class="card-body closed px-0">
-			  <div class="white px-4 pb-4 pt-3-5 text-center">
-				<!-- Title -->
-				<h5 class="card-title h5 living-coral-text"><%= accommodation.location %></h5>
-				<div class="d-flex justify-content-center living-coral-text">
-				  <button class="btn peach-gradient">
-					  See Routes <i class="fas fa-map-marked-alt"></i>
-					</button>
-				</div>
-			  </div>
-
-			<!-- </div> -->
-
-		  </div>
-		  <!-- Card -->
-			
 			<!-- BOOKING FORM -->
-			<div class="card-body rounded-top pink darken-4">
+			<div class="card-body rounded-top pink darken-4 mb-3">
 			  <h4 class="font-weight-bold text-center text-white mt-4">Reserve Now</h4>
 			  <!-- Form -->
 			  <form class="pb-3 px-2" action="#">
@@ -60,8 +39,24 @@
 			  </form>
           <!-- BOOKING FORM END -->
 
-      	</div>
+      		</div>
+			<!-- Card -->
+			  <div class="card map-card mb-4">
+				<!-- GOOGLE MAP -->
+				<div id="map"></div>
+				<!-- Card content -->
+				<div class="card-body closed px-0">
+				  <div class="white px-4 pb-4 pt-3-5 text-center">
+					<!-- Title -->
+					<h5 class="card-title h5 living-coral-text"><%= accommodation.location %></h5>
+					<div class="d-flex justify-content-center living-coral-text">
+					  <button class="btn peach-gradient">
+						  See Routes <i class="fas fa-map-marked-alt"></i>
+						</button>
+					</div>
+				</div>
 			</div>
+		</div>
 			
 	<!-- CONTACT CARD -->
 	<!-- <div class="card">
@@ -158,11 +153,7 @@
                             Write a Review</a>
                     </div>
                 </div>
-            </div>
-			
-			
-	<!--COMMENT SECTION START-->
-    <div class="well">
+			<div class="well">
       <!--Setting up the add new comment button that is used for collapsing-->
       <div class="text-right">
         <a class="btn btn-success" role="button" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
@@ -253,6 +244,7 @@
       </div>
         <% }) %>
     </div>
+</div>
 		
 	</div>
 </div>
@@ -284,6 +276,6 @@
     });
   }
 </script>
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlruGDXINk2aodw36mYDk2IOaYrhCUmZU&callback=initMap"></script> -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlruGDXINk2aodw36mYDk2IOaYrhCUmZU&callback=initMap"></script>
 
 <%- include("../partials/footer"); -%>

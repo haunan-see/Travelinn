@@ -1,20 +1,55 @@
-<%- include('partials/header'); -%>
+<%- include("partials/header"); -%>
 
 
-<div class="container">
-	<h1>
-	Register
+<div class="container col-md-6 col-lg-5">
+	<h1 class="text-center">
+	Sign Up
 	</h1>
 
-	<form action="/register" method="POST">
-		<input type="text" name="username" placeholder="Username">
-		<input type="password" name="password" placeholder="Password">
-		<button>
-			Sign-up
-		</button>
+	<!-- Default form register -->
+	<form class="text-center border border-light p-5" action="/register" method="POST">
+
+		<div class="form-row mb-4">
+			<div class="col">
+				<!-- First name -->
+				<input type="text" class="form-control" placeholder="First name" required>
+			</div>
+			<div class="col">
+				<!-- Last name -->
+				<input type="text" class="form-control" placeholder="Last name" required>
+			</div>
+		</div>
+
+		<!-- Username -->
+		<input type="text" class="form-control mb-4" name="username" placeholder="Username" required>
+
+		<!-- Password -->
+		<input type="password" class="form-control" name="password" placeholder="Password" minlength="8" required>
+		<small class="form-text text-muted mb-4">
+			At least 8 characters and 1 digit
+		</small>
+
+		<!-- E-mail -->
+		<input type="email" class="form-control" placeholder="E-mail" required>
+		<small class="form-text text-muted mb-4">
+			Required - Confirmation email will be sent to your email address.
+		</small>
+
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input" id="acceptT&C">
+			<label class="custom-control-label" for="acceptT&C">I agree to <a href="#">Terms and Conditions</a> of Travelinn</label>
+		</div>
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input" id="subscribeNewsletter">
+			<label class="custom-control-label" for="subscribeNewsletter">Subscribe to our newsletter</label>
+		</div>
+
+		<button class="btn purple-gradient my-4 btn-block" type="submit">Confirm</button>
+
 	</form>
-	<a href="/accommodations">Go Back</a>
+	
+	<a href="/accommodations" class="btn btn-default"><i class="fas fa-arrow-left"></i> Go Back</a>
 </div>
 
 
-<%- include('partials/footer'); -%>
+<%- include("partials/footer"); -%>

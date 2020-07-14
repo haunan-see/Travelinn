@@ -1,18 +1,53 @@
 <%- include('partials/header'); -%>
 
-<div class="container">
-	<h1>
+<div class="container col-md-6 col-lg-5">
+	<h1 class="text-center">
 	Log In
 	</h1>
+	
+	<form class="text-center border border-light p-5" action="/login" method="POST">
 
-	<form action="/login" method="POST">
-		<input type="text" name="username" placeholder="Username">
-		<input type="password" name="password" placeholder="Password">
-		<button>
-			Log In
-		</button>
+		<div class="md-form">
+        <input type="text" class="form-control" name="username">
+        <label>Username</label>
+      </div>
+
+      <div class="md-form">
+        <input type="password" class="form-control" name="password">
+        <label>Password</label>
+      </div>
+
+		<div class="d-flex justify-content-around">
+			<div>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+					<label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+				</div>
+			</div>
+			<div>
+				<a href="#">Forgot password?</a>
+			</div>
+		</div>
+
+		<!-- Sign in button -->
+		<button class="btn blue-gradient btn-block my-4" type="submit">Sign in</button>
+
+		<!-- Register -->
+		<p>Not a member?
+			<a href="/register">Register</a>
+		</p>
+
+		<!-- Social login -->
+		<p><small>or sign in with:</small></p>
+
+		<a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
+		<a href="#" class="mx-2" role="button"><i class="fab fa-apple light-blue-text"></i></a>
+		<a href="#" class="mx-2" role="button"><i class="fab fa-google light-blue-text"></i></a>
+		<a href="#" class="mx-2" role="button"><i class="fab fa-instagram light-blue-text"></i></a>
+
 	</form>
-	<a href="/accommodations">Go Back</a>
+	
+	<a href="/accommodations" class="btn btn-default"><i class="fas fa-arrow-left"></i> Go Back</a>
 </div>
 
 
