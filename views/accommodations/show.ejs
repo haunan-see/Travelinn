@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-3">
 			<!-- BOOKING FORM -->
-			<div class="card-body rounded-top pink darken-4 mb-3">
+			<div class="card-body rounded-top mdb-color mb-3">
 			  <h4 class="font-weight-bold text-center text-white mt-4">Reserve Now</h4>
 			  <!-- Form -->
 			  <form class="pb-3 px-2" action="#">
@@ -35,7 +35,7 @@
 					  <input type="date" id="materialRegisterFormPassword" class="form-control text-white" aria-describedby="materialRegisterFormPasswordHelpBlock">
 				  </div>
 				  
-				  <button class="btn peach-gradient btn-block my-4 waves-effect z-depth-0" type="submit">Confirm</button>
+				  <button class="btn danger-color-dark btn-block my-4 waves-effect z-depth-0 text-white" type="submit">Confirm</button>
 			  </form>
           <!-- BOOKING FORM END -->
 
@@ -90,15 +90,13 @@
 					</p>
 					<% if(currentUser && accommodation.author.id.equals(currentUser._id)){ %>
 						<a class="btn btn-sm btn-warning" href="/accommodations/<%= accommodation._id %>/edit">Edit</a>
-					<form class="delete-form" action="/accommodations/<%= accommodation._id %>?_method=DELETE" method="POST">
-						<button class="btn btn-sm btn-danger">Delete</button>
-					</form>
+						<form class="delete-form" action="/accommodations/<%= accommodation._id %>?_method=DELETE" method="POST">
+							<button class="btn btn-sm btn-danger">Delete</button>
+						</form>
 					<% } %>
 				</div>
 				<% if (accommodation.rating === 0) { %>
-                    <h5>
-                        <em>No reviews yet.</em>
-                    </h5>
+				<h5 id="noReview"><em><small>No reviews yet.</small></em></h5>
                     <% } else { %>
 					<div class="card-footer">
                     <p>
@@ -149,7 +147,7 @@
                     </div>
                     <% } %>
                     <div>
-                        <a class="btn btn-primary btn-lg <% if (currentUser && accommodation.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/accommodations/<%= accommodation._id %>/reviews/new">
+                        <a id="reviewBtn" class="btn btn-primary btn-lg <% if (currentUser && accommodation.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/accommodations/<%= accommodation._id %>/reviews/new">
                             Write a Review</a>
                     </div>
                 </div>
@@ -276,6 +274,6 @@
     });
   }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlruGDXINk2aodw36mYDk2IOaYrhCUmZU&callback=initMap"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlruGDXINk2aodw36mYDk2IOaYrhCUmZU&callback=initMap"></script> -->
 
 <%- include("../partials/footer"); -%>

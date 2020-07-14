@@ -3,9 +3,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 style="text-align: center">Review Page: <%= accommodation.name %></h1>
-            <a href="/accommodations/<%= accommodation._id %>">Go back to the accommodation page</a>
-            <div class="thumbnail">
+			<h1 style="text-align: center">Review: <em><%= accommodation.name %></em></h1>
+            <div class="card">
                 <div class="caption-full">
                     <% if (accommodation.rating === 0) { %>
                     <h5>
@@ -27,9 +26,10 @@
                     <hr style="margin-top: 0;">
                     <% accommodation.reviews.forEach(function(review){ %>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="border-right: 1px solid rgb(211,211,211)">
+							<div>Review by: <strong><%= review.author.username %></strong></div>
                             <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="fa fa-star"></span>'.repeat(5 - review.rating) %>
-                            <div>Review by: <strong><%= review.author.username %></strong></div>
+							<br>
                             <span><em><%= review.updatedAt.toDateString() %></em></span>
                         </div>
                         <div class="col-md-9">
@@ -53,7 +53,7 @@
                             Write a New Review</a>
                     </div>
                     <div style="margin-top: 10px;">
-                        <a class="btn btn-default" href="/accommodations/<%= accommodation._id %>"><i class="fa fa-arrow-left"></i> Go back</a>
+						<a href="/accommodations/<%= accommodation._id %>" class="btn btn-link p-0"><i class="fas fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
             </div>

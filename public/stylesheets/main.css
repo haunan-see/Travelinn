@@ -74,6 +74,15 @@ html {
 }
 /* alert style */
 
+#noReview {
+	margin-left: 2%;
+}
+
+#reviewBtn {
+	margin-left: 18px;
+	margin-bottom: 18px;
+}
+
 /* CONFIMED STYLE END */
 
 /* 	test */
