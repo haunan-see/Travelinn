@@ -1,6 +1,7 @@
 var Accommodation = require("../models/accommodation");
 var Comment = require("../models/comment");
 var Review = require("../models/review");
+var User = require("../models/user");
 
 var middlewareObject = {
 
@@ -78,6 +79,26 @@ var middlewareObject = {
 				}  else {
 					// does user own the comment?
 					if(foundReview.author.id.equals(req.user._id)) {
+						next();
+					} else {
+						req.flash("error", "Permission Denied.");
+						res.redirect("back");
+					}
+				}
+			});
+		} else {
+			req.flash("error", "Log in required.");
+			res.redirect("back");
+		}
+	},
+	
+	isAccountOwner: (req, res, next) => {
+		if (req.isAuthenticated()){
+			User.findById(req.params.id, (err, foundUser) => {
+				if (err){
+					res.redirect("back");
+				} else {
+					if (foundUser.id == req.user._id) {
 						next();
 					} else {
 						req.flash("error", "Permission Denied.");

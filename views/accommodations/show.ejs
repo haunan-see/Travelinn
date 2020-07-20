@@ -85,7 +85,7 @@
 					</h4>
 					<p><%= accommodation.description %></p>
 					<p>
-						<em>Submitted by <%= accommodation.author.username %></em>
+						<em>Submitted by <a href="/users/<%= accommodation.author.id %>"><%= accommodation.author.username %></a></em>
 						<span class="float-right"><%= moment(accommodation.createdAt).fromNow() %></span>
 					</p>
 					<% if(currentUser && accommodation.author.id.equals(currentUser._id)){ %>

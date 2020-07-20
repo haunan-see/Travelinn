@@ -1,0 +1,43 @@
+<%- include("../partials/header"); -%>
+
+
+<div class="container col-md-6 col-lg-5">
+	<h1 class="text-center">
+	Edit Profile
+	</h1>
+
+	<!-- Default form register -->
+	<form class="text-center border border-light p-5" action="/users/<%= user._id %>?_method=PUT" method="POST">
+		<div class="form-row mb-4">
+			<div class="col">
+				<!-- First name -->
+				<input type="text" class="form-control" name="firstName" placeholder="First name" value="<%= user.firstName %>" required>
+			</div>
+			<div class="col">
+				<!-- Last name -->
+				<input type="text" class="form-control" name="lastName" placeholder="Last name" value="<%= user.lastName %>">
+			</div>
+		</div>
+
+		<!-- Username -->
+		<input type="text" class="form-control mb-4" name="username" placeholder="Username" value="<%= user.username %>" disabled>
+
+
+		<!-- E-mail -->
+		<input type="email" class="form-control" name="email" placeholder="E-mail" value="<%= user.email %>" required>
+
+		
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input" id="subscribeNewsletter">
+			<label class="custom-control-label" for="subscribeNewsletter">Subscribe to our newsletter</label>
+		</div>
+
+		<button class="btn purple-gradient my-4 btn-block" type="submit">Confirm</button>
+
+	</form>
+	
+	<a href="/users/<%= user._id %>" class="btn btn-link"><i class="fas fa-arrow-left"></i> Go Back</a>
+</div>
+
+
+<%- include("../partials/footer"); -%>

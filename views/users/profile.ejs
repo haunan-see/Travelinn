@@ -1,0 +1,25 @@
+<%- include("../partials/header"); -%>
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-caption">
+				<%= user.firstName + " " + user.lastName %> 's Profile
+			</div>
+			<label>Email: <a href="mailto:<%= user.email %>"><%= user.email %></a></label>
+			<br>
+			<% if(currentUser){ %>
+				<a class="btn btn-sm btn-warning" href="/users/<%= user._id %>/edit">Edit Profile</a>
+			<% } %>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-8">
+		<div class="card">
+			show user's post here
+		</div>
+	</div>
+</div>
+
+<%- include("../partials/footer"); -%>
