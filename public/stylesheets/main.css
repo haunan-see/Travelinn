@@ -1,9 +1,9 @@
 body {
 	font-family: 'Raleway', sans-serif;
-	/* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3) ), whitesmoke; */
-	background-color: #EDEFF8;
-	/* background-repeat: no-repeat;
-	background-size: cover; */
+	background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4) ), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80");
+	/* background-color: #EDEFF8; */
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 img {

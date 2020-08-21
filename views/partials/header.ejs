@@ -24,53 +24,52 @@
     </head>
     <body>
 		
-		<!-- MDN NAVBAR START -->
 		<!--Navbar -->
 <nav id="mainNavbar" class="mb-1 navbar navbar-expand-lg navbar-dark indigo">
-  <a class="navbar-brand" href="/">Travelinn</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/accommodations">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-		<li class="nav-item">
-        <form action="/accommodations" method="GET" class="form-inline my-2 my-lg-0 ml-auto">
-			<div class="form-group">
-				<input class="form-control" type="text" name="search" placeholder="Location / Accommodation Name" aria-label="Search">
-				<button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
-			</div>
-  		</form>
-      </li>
-		
-      	<% if(!currentUser){ %>
-			<li><a class="btn btn-info btn-rounded btn-sm" href="/login">Login <i class="fas fa-sign-in-alt"></i></a></li>
-			<li><a class="btn btn-info btn-rounded btn-sm" href="/register">Sign-Up <i class="fas fa-user-plus"></i></a></li>
-		<% } else { %>
-			<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
-			  aria-haspopup="true" aria-expanded="false">
-			  <i class="fas fa-user"></i> <%= currentUser.username %> </a>
-			<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-			  <a class="dropdown-item" href="#">My account</a>
-			  <a class="dropdown-item" href="/logout">Log out</a>
-			</div>
+	<div class="container">
+	  <a class="navbar-brand" href="/">Travelinn</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+		aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+		<ul class="navbar-nav mr-auto">
+		  <li class="nav-item">
+			<a class="nav-link" href="/accommodations">Home</a>
 		  </li>
-		<% } %>
-    </ul>
-  </div>
+		  <li class="nav-item">
+			<a class="nav-link" href="#">About</a>
+		  </li>
+		</ul>
+		<ul class="navbar-nav ml-auto nav-flex-icons">
+			<li class="nav-item">
+			<form action="/accommodations" method="GET" class="form-inline my-2 my-lg-0 ml-auto">
+				<div class="form-group">
+					<input class="form-control" type="text" name="search" placeholder="Location / Accommodation Name" aria-label="Search">
+					<button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+				</div>
+			</form>
+		  </li>
+
+			<% if(!currentUser){ %>
+				<li><a class="btn btn-info btn-rounded btn-sm" href="/login">Login <i class="fas fa-sign-in-alt"></i></a></li>
+				<li><a class="btn btn-info btn-rounded btn-sm" href="/register">Sign-Up <i class="fas fa-user-plus"></i></a></li>
+			<% } else { %>
+				<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+				  aria-haspopup="true" aria-expanded="false">
+				  <i class="fas fa-user"></i> <%= currentUser.username %> </a>
+				<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+				  <a class="dropdown-item" href="#">My account</a>
+				  <a class="dropdown-item" href="/logout">Log out</a>
+				</div>
+			  </li>
+			<% } %>
+		</ul>
+	  </div>
+	</div>
 </nav>
 <!--/.Navbar -->
-		<!-- MDN NAVBAR END-->
-
 		
 		<div id="alert" class="container">
 			<% if(error && error.length > 0){ %>
